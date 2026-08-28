@@ -97,3 +97,5 @@ Los 2 requerimientos prioritarios para el MVP (Producto Mínimo Viable) en la pr
   - **Justificación:** No debe implementarse como borrado físico en base de datos si el torneo ya cuenta con equipos y pagos asociados, ya que violaría la consistencia de datos y la auditoría contable. Debe ser reemplazado por la cancelación lógica mediante el ciclo de vida de estados (*Cancelled*) estipulado en RF-01.
 - *(A nivel de interfaz/UX)* **RNF-4 (`"El boton para acceder a la aplicación del torneo debe ser el logo"`):**
   - **Justificación:** Representa un anti-patrón de accesibilidad y usabilidad si no incluye texto explicativo o un *Call to Action* (CTA) claro para el inicio de sesión.
+
+### 4. Mockup
