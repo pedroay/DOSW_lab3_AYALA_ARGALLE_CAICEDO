@@ -98,4 +98,14 @@ Los 2 requerimientos prioritarios para el MVP (Producto Mínimo Viable) en la pr
 - *(A nivel de interfaz/UX)* **RNF-4 (`"El boton para acceder a la aplicación del torneo debe ser el logo"`):**
   - **Justificación:** Representa un anti-patrón de accesibilidad y usabilidad si no incluye texto explicativo o un *Call to Action* (CTA) claro para el inicio de sesión.
 
-### 4. Mockup
+## 4. Mockup
+
+### Requerimiento funcional seleccionado: RF-02 — Registrar Equipo
+
+Se seleccionó el requerimiento funcional **RF-02 (Registrar Equipo)** para el diseño de los mockups:
+
+### Diseño de Mockups — Flujo de Registro de Equipo
+
+Los mockups del flujo de navegación para el registro de un equipo fueron diseñados en **Figma** y pueden consultarse en el siguiente enlace:
+
+🔗 **[Ver Mockups en Figma — Flujo de Registro de Equipo](https://www.figma.com/design/NvDN2mIs8itoVR14fFOCbU/Flujo-Registro?node-id=0-1&t=sMDkfjVEIjFY629o-1)**
