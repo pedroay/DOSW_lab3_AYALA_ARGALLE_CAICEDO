@@ -73,3 +73,27 @@ El sistema de TECHCUP debe tener:
 | **Poscondiciones** | Se espera como resultado que el pago de la inscripción quede registrado exitosamente en el sistema, el equipo quede formalmente inscrito en el torneo y el comprobante de pago esté disponible para consulta y validación por parte de los organizadores. |
 
 ## 3. Preguntas
+
+### i. Do you identify any requirement that needs to be further detailed? Which one(s)?
+Sí, se identifican varios requerimientos que presentan ambigüedad o falta de especificación:
+- **RF-5 (`"mandar reporte en formato json a la decanatura"`):** No define la estructura/esquema del JSON (campos requeridos), el mecanismo de envío (API REST, descarga, correo, webhook), ni el evento disparador (*trigger*) de dicho reporte.
+- **RNF-3 (`"El tipo fuente de la letra debe ser la que usa"`):** La redacción está incompleta; no especifica la tipografía exacta ni la guía de estilo institucional a seguir.
+- **RNF-1 (`"Los colores de la Universidad"`):** No especifica los códigos HEX/RGB oficiales ni directrices de contraste.
+- **RF-2 / RF-02 (`"Registrar Equipo"`):** Requiere detallar reglas de negocio como el mínimo/máximo de integrantes por equipo, validaciones de condición de estudiante activo y la restricción de que un estudiante no pueda pertenecer a múltiples equipos en el mismo torneo.
+
+### ii. Are there any requirements that contradict each other? Which one(s)?
+Sí, existe una contradicción entre:
+- **RF-10 (`"Capacidad para eliminar un torneo en su totalidad, incluyendo todos los equipos que se hayan registrado en él"`):**
+  - Entra en conflicto directo con **RF-01**, **RF-07** y **RF-09**.
+  - **Explicación:** Una eliminación física (*hard-delete*) en cascada de un torneo destruye la integridad referencial y el historial financiero/auditable de pagos procesados mediante PSE (RF-07, RF-09). Para preservar la trazabilidad, el sistema debe utilizar la transición de estados definida en RF-01 (*Cancelled*) o un borrado lógico (*soft-delete*).
+
+### iii. If you had to prioritize the requirements, which 2 requirements should be considered the most important and implemented in the first iteration of the project?
+Los 2 requerimientos prioritarios para el MVP (Producto Mínimo Viable) en la primera iteración son:
+1. **RF-01 / RF-1 (Gestión del Torneo):** Es el contenedor y entidad raíz del dominio. Sin un torneo creado y en estado `Active`, no existe contexto para registrar equipos, procesar pagos o generar reportes.
+2. **RF-02 / RF-2 (Registrar Equipo):** Es la funcionalidad core para los usuarios finales (estudiantes/capitanes). Construye la estructura de participantes necesaria sobre la cual operarán los pagos y demás módulos.
+
+### iv. Is there any requirement that should not be implemented?
+- **RF-10 (`"Capacidad para eliminar un torneo en su totalidad, incluyendo todos los equipos que se hayan registrado en él"` como eliminación física destructiva):**
+  - **Justificación:** No debe implementarse como borrado físico en base de datos si el torneo ya cuenta con equipos y pagos asociados, ya que violaría la consistencia de datos y la auditoría contable. Debe ser reemplazado por la cancelación lógica mediante el ciclo de vida de estados (*Cancelled*) estipulado en RF-01.
+- *(A nivel de interfaz/UX)* **RNF-4 (`"El boton para acceder a la aplicación del torneo debe ser el logo"`):**
+  - **Justificación:** Representa un anti-patrón de accesibilidad y usabilidad si no incluye texto explicativo o un *Call to Action* (CTA) claro para el inicio de sesión.
